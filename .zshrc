@@ -5,20 +5,42 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+#To activate these completions, add the following to your .zshrc:
+
+  if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+    autoload -Uz compinit
+    compinit
+  fi
+
+
+fpath=(path/to/zsh-completions/src $fpath)
+
+#This adds the directory containing the Homebrew version of Git 
+export PATH="/usr/local/Cellar/git/2.40.0/bin:$PATH"
+
+
+#You may also need to force rebuild `zcompdump`:
+# rm -f ~/.zcompdump; compinit
+#Additionally, if you receive "zsh compinit: insecure directories" warnings when attempting
+#to load these completions, you may need to run this:
+#  chmod -R go-w '/usr/local/share/zsh'
+
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-#fonts
-#https://github.com/Falkor/dotfiles/blob/master/fonts/SourceCodePro%2BPowerline%2BAwesome%2BRegular.ttf
+# Fix Oh My Zsh “Insecure completion-dependent directories detected”
+ZSH_DISABLE_COMPFIX=true
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
@@ -26,6 +48,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -81,8 +105,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# Enable suggestions
-# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 plugins=(
     git
     zsh-autosuggestions
@@ -118,3 +140,34 @@ source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source /usr/local/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+# alias Linux
+alias src!="source ~/.zshrc && echo 'complete'" 
+alias ls="ls -l" 
+
+# alias git
+alias ad="git ad"
+alias add="git add ."
+alias co="git commit -m"
+alias co-amend="git co-amend"
+alias dif="git dif"
+alias push="git pus"
+alias rst="git rst"
+alias rst-h="git reset --hard"
+alias rst-m="git reset --mixed"
+alias rst-s="git reset --soft"
+alias br="git branch"
+alias br-m="git branch -m"
+alias br-d="git br-d"
+alias ch="git ch"
+alias ch-b="git checkout -b"
+alias st="git status"
+alias log="git log --oneline"
+alias pull="git pul"
+alias fetch="git fetch"
+alias sts="git stash save"
+alias stsp="git stash pop"
+alias std="git std"
+alias sta="git sta"
+alias chp="git cherry-pick"
