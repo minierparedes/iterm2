@@ -48,4 +48,7 @@ Add plugin to .zshrc file: `plugins=(zsh-autosuggestions)`
 Update terminal.integrated.fontFamily setting to 
 `'SourceCodePro+PowerLine+AwesomeRegular'`
 
+#### Step 12: Install gitui
+GitUI provides you with the comfort of a git GUI but right in your terminal
+Download & Install: [gitui](https://github.com/extrawurst/gitui)
 
